@@ -191,13 +191,13 @@ void zprop_source_tostr(char *dst, zprop_source_t source) {
 }
 
 
-int read_zpool_property(zpool_handle_t *zh, property_list_t *list, int prop) {
+int read_zpool_property(zpool_handle_t *zh, property_list_t *list, int prop, boolen_t literal) {
 
 	int r = 0;
 	zprop_source_t source;
 
 	r = zpool_get_prop(zh, prop,
-		list->value, INT_MAX_VALUE, &source);
+		list->value, INT_MAX_VALUE, &source, literal);
 	if (r == 0) {
 		// strcpy(list->name, zpool_prop_to_name(prop));
 		zprop_source_tostr(list->source, source);
